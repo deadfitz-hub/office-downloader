@@ -1,0 +1,16 @@
+name: Remote Upload Office
+on: [workflow_dispatch]
+jobs:
+  download_and_upload:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download file to Server
+        run: |
+          wget -O Office2024ProPlusLTSCRu.iso "https://download.softes.ru/office/office2024/Office2024ProPlusLTSCRu.iso"
+
+      - name: Upload directly to Google Drive
+        uses: adityak74/google-drive-upload-gitaction@main
+        with:
+          credentials: ${{ secrets.GDRIVE_CREDENTIALS }}
+          filename: Office2024ProPlusLTSCRu.iso
+          folderId: ${{ secrets.GDRIVE_FOLDER_ID }}
