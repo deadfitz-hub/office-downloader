@@ -4,20 +4,10 @@ jobs:
   download_and_upload:
     runs-on: ubuntu-latest
     steps:
-      - name: Download file to Server
+      - name: Download from Softes
         run: |
           wget -O Office2024ProPlusLTSCRu.iso "https://softes.ru"
 
-      - name: Install Rclone
+      - name: Transfer to Free Storage
         run: |
-          curl https://rclone.org | sudo bash
-
-      - name: Configure Rclone and Upload
-        run: |
-          mkdir -p ~/.config/rclone
-          echo '[gdrive]' > ~/.config/rclone/rclone.conf
-          echo 'type = drive' >> ~/.config/rclone/rclone.conf
-          echo 'client_id = ://googleusercontent.com' >> ~/.config/rclone/rclone.conf
-          echo 'client_secret = v9Tej-gS2f7_H0mHwM423S' >> ~/.config/rclone/rclone.conf
-          echo 'scope = drive' >> ~/.config/rclone/rclone.conf
-          rclone copy Office2024ProPlusLTSCRu.iso gdrive:${{ secrets.GDRIVE_FOLDER_ID }} --progress
+          curl https://bashupload.com --data-binary @Office2024ProPlusLTSCRu.iso
